@@ -1,5 +1,6 @@
 {
-  "name": "react-animated-grid",
+  "name": "@greg.zanchelli/react-animated-grid",
+  "private": false,
   "version": "1.0.0",
   "description": "animated grid using react spring",
   "main": "./lib/cjs/index.js",
