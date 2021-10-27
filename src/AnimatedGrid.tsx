@@ -5,6 +5,9 @@ import useMedia from "./useMedia";
 //@ts-ignore
 import styles from "./AnimatedGrid.module.css";
 
+
+
+
 type AnimatedGridData<T extends object> = T & {
   x: number;
   y: number;
@@ -13,10 +16,18 @@ type AnimatedGridData<T extends object> = T & {
   index: number;
 };
 
+type Query = string;
+
+type ColumnQueryMap = {
+  [query: Query]: number;
+};
+
+type ColumnQueryConfig = {
+  columnQueries: number;
+  itemWidth: number;
+};
+
 type AnimatedGridProps<T extends { [key: string]: any }> = {
-  columnQueryMap: {
-    [query: string]: number;
-  };
   defaultColumnCount: number;
   data: Array<T>;
   heightFn?: (item: T) => number;
@@ -25,10 +36,25 @@ type AnimatedGridProps<T extends { [key: string]: any }> = {
   renderFn: (item: AnimatedGridData<T>) => JSX.Element;
   config?: SpringConfig;
   trail?: number;
+} & (
+  | {
+      columnQueryMap: ColumnQueryMap;
+    }
+  | ColumnQueryConfig
+);
+
+const generateColumnQueryMap = ({
+  columnQueries,
+  itemWidth,
+}: ColumnQueryConfig) => {
+  const queries = {};
+  for (let i = columnQueries; i > 0; i--) {
+    queries[`(min-width: ${i * itemWidth}px)`] = i;
+  }
+  return queries;
 };
 
 export function AnimatedGrid<T extends object>({
-  columnQueryMap,
   defaultColumnCount,
   data,
   defaultHeight,
@@ -37,7 +63,14 @@ export function AnimatedGrid<T extends object>({
   renderFn,
   config,
   trail,
+  ...props
 }: AnimatedGridProps<T>) {
+  const columnQueryMap = useMemo(() => {
+    if (props["columnQueries"] as ColumnQueryConfig) {
+      return generateColumnQueryMap(props as ColumnQueryConfig);
+    }
+    return props["columnQueryMap"] as ColumnQueryMap;
+  }, []);
   const columns = useMedia(columnQueryMap, defaultColumnCount);
   const [ref, { width }] = useMeasure();
   const [items, set] = useState(data);
@@ -91,7 +124,7 @@ export function AnimatedGrid<T extends object>({
         <a.div
           style={{
             position: "absolute",
-            padding: "15px",
+            padding: "0px",
             willChange: "transform, width, height, opacity",
             boxSizing: "border-box",
             ...style,
