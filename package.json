@@ -1,14 +1,14 @@
 {
   "name": "@greg.zanchelli/react-animated-grid",
   "private": false,
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "animated grid using react spring",
   "main": "./lib/cjs/index.js",
   "module": "./lib/esm/index.js",
   "types": "./lib/index.d.ts",
   "license": "MIT",
   "files": [
-    "./lib"
+    "lib"
   ],
   "scripts": {
     "build": "rollup -c",
