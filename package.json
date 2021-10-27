@@ -6,6 +6,9 @@
   "module": "./lib/esm/index.js",
   "types": "./lib/index.d.ts",
   "license": "MIT",
+  "files": [
+    "./lib"
+  ],
   "scripts": {
     "build": "rollup -c",
     "start": "rollup -w -c"
