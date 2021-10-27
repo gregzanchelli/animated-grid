@@ -51,7 +51,7 @@ const generateColumnQueryMap = ({
 }: ColumnQueryConfig) => {
   const queries = {};
   for (let i = columnQueries; i > 0; i--) {
-    queries[`(min-width: ${i * itemWidth - windowPadding}px)`] = i;
+    queries[`(min-width: ${i * itemWidth + windowPadding}px)`] = i;
   }
   return queries;
 };
@@ -72,7 +72,12 @@ export function AnimatedGrid<T extends object>({
       return generateColumnQueryMap(props as ColumnQueryConfig);
     }
     return props["columnQueryMap"] as ColumnQueryMap;
-  }, []);
+  }, [
+    props["columnQueries"],
+    props["scolumnQueryMap"],
+    props["itemWidth"],
+    props["windowPadding"],
+  ]);
   const columns = useMedia(columnQueryMap, defaultColumnCount);
   const [ref, { width }] = useMeasure();
   const [items, set] = useState(data);

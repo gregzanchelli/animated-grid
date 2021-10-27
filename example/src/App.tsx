@@ -23,7 +23,7 @@ export default function App() {
       }}
       itemWidth={240}
       columnQueries={9}
-      windowPadding={0}
+      windowPadding={100}
       keyFn={(item) => item.id}
       renderFn={(item) => {
         return (
