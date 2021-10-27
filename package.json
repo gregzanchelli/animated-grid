@@ -4,22 +4,33 @@
   "description": "animated grid using react spring",
   "main": "./lib/cjs/index.js",
   "module": "./lib/esm/index.js",
-  "types": "./lib/esm/index.d.ts",
+  "types": "./lib/index.d.ts",
   "license": "MIT",
   "scripts": {
-    "build": "tsc",
-    "build:esm": "tsc",
-    "build:cjs": "tsc --module commonjs --outDir lib/cjs"
+    "build": "rollup -c",
+    "start": "rollup -w -c"
   },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^21.0.1",
+    "@rollup/plugin-node-resolve": "^13.0.6",
     "@types/react": "^17.0.33",
     "@types/react-dom": "^17.0.10",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "postcss": "^8.3.11",
+    "rollup": "^2.58.3",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-postcss": "^4.0.1",
+    "rollup-plugin-typescript2": "^0.30.0",
+    "tslib": "^2.3.1",
     "typescript": "^4.4.4"
   },
   "peerDependencies": {
     "react": "^16.8.0",
     "react-dom": "^16.8.0"
+  },
+  "dependencies": {
+    "@react-spring/web": "^9.3.0",
+    "@types/debounce": "^1.2.1",
+    "debounce": "^1.2.1",
+    "react-use-measure": "^2.0.4"
   }
 }
