@@ -14,6 +14,7 @@ declare type ColumnQueryMap = {
 declare type ColumnQueryConfig = {
     columnQueries: number;
     itemWidth: number;
+    windowPadding: number;
 };
 declare type AnimatedGridProps<T extends {
     [key: string]: any;

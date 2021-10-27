@@ -25,6 +25,7 @@ type ColumnQueryMap = {
 type ColumnQueryConfig = {
   columnQueries: number;
   itemWidth: number;
+  windowPadding: number;
 };
 
 type AnimatedGridProps<T extends { [key: string]: any }> = {
@@ -46,10 +47,11 @@ type AnimatedGridProps<T extends { [key: string]: any }> = {
 const generateColumnQueryMap = ({
   columnQueries,
   itemWidth,
+  windowPadding,
 }: ColumnQueryConfig) => {
   const queries = {};
   for (let i = columnQueries; i > 0; i--) {
-    queries[`(min-width: ${i * itemWidth}px)`] = i;
+    queries[`(min-width: ${i * itemWidth - windowPadding}px)`] = i;
   }
   return queries;
 };
