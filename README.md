@@ -5,12 +5,12 @@ A react component for display an animated grid of cards using react-spring
 ## Install
 with yarn
 ```sh
-yarn add react-animated-grid
+yarn add @greg.zanchelli/react-animated-grid
 ```
 or using npm
 
 ```sh
-npm install --save react-animated-grid
+npm install --save @greg.zanchelli/react-animated-grid
 ```
 
 # Using
